@@ -1,0 +1,68 @@
+// Created by Peter
+// Created on May
+// This is a program about random walk
+
+import javax.swing.JFrame;
+import java.awt.Graphics;
+import java.util.Random;
+import java.util.Scanner;
+import java.awt.Color;
+
+ public class RandomWalk extends JFrame{
+
+	 int xPosition = 250;
+	 int yPosition = 250;
+	 
+	 public RandomWalk() {
+         super("Random Walk");
+         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
+         setSize(500,500);
+         setVisible(true);
+       }
+
+     public void paint(Graphics square){
+    	 System.out.print("Enter the size of target:  ");
+    	 Scanner input = new Scanner(System.in);
+    	 int target = input.nextInt();
+
+     super.paint(square);
+          Random rand = new Random();
+          int position = rand.nextInt(500);
+          
+          //square.drawRect(target,target,target,target);
+          square.setColor(Color.RED);
+          square.fillRect(position,position,target,target);
+      
+	      square.setColor(Color.BLACK);    
+	      do {
+	    	 
+	          
+	          Random ran = new Random();
+	          int next = ran.nextInt(4)+1;
+	          if(next == 1) {
+		    	 xPosition +=1;
+		      }
+		      else if(next == 2) {
+		    	  xPosition -= 1 ;
+		      }
+		      else if(next == 3) {
+		    	 yPosition += 1 ;
+		      }
+		      else if(next == 4) {
+		    	 yPosition -= 1 ;
+		      }
+	          
+	          if(xPosition > 500 || yPosition > 500) {
+	        	  xPosition = 500;
+	        	  yPosition = 500;
+	          }
+          
+	          square.drawRect(xPosition, yPosition,1,1);
+	      }while(xPosition >= position+target || xPosition <= position-target || (yPosition >= position+target || yPosition <= position-target));    
+          
+    }
+     
+    public static void main(String[]args) {
+	    RandomWalk rect=new RandomWalk();
+    }
+}
